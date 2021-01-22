@@ -54,10 +54,10 @@ fun simplify (Op1(Not, Op1(Not,expr))) = simplify(expr) (* not(not e) *)
 0 + e (OK)
 e + 0 (OK)
 e - 0 (OK)
-1 * e
-e * 1
-0 * e
-e * 0
+1 * e (OK)
+e * 1 (OK)
+0 * e (OK)
+e * 0 (OK)
 e - e (OK)
 e or e (OK)
 not(not e) (OK)
