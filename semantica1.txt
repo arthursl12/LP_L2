@@ -1,0 +1,11 @@
+(*
+Entradas:
+    x := n
+    y := m
+*)
+
+count := 1;
+total := 1;
+while (count <= y) do   
+    total := total * x;
+    count := count + 1
