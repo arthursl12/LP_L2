@@ -1,2 +1,79 @@
-(b) (demonstre)
-(d)
+(a) Implementado no arquivo '6.sml'
+
+(b) O comando 'repeat' foi definido no datatype Stm no arquivo '6.sml'
+A relação para ele, seguindo a notação da Tabela 2.1:
+
+[repeat FF] <S, s> -> s', <repeat S until b, s'> -> s''
+            -------------------------------------------- if B[b]s' = FF
+            <repeat S until b, s> -> s''
+
+[repeat TT] <S, s> -> s'
+            -------------------------------------------- if B[b]s' = TT
+            <repeat S until b, s> -> s'
+
+(c) Implementado no arquivo '6.sml'
+
+(d) Vamos fazer uma demonstração por casos
+Caso 1: B[b]s' = TT
+A primeira expressão fica:
+<S, s> -> s'
+-------------------------------------------- if B[b]s' = TT
+<repeat S until b, s> -> s'
+
+A segunda fica:
+                        B[b]s' -> TT                       <skip, s'> -> s'
+                        --------------------------------------------------- [if TT]
+<S,s> -> s'             <if b then skip else repeat S until b, s'> -> s'
+--------------------------------------------------------------------------- [comp2]
+comp<S; if b then skip else repeat S until b, s> -> s'
+
+Ambas culminam com o estado mesmo estado s'.
+
+Caso 2: B[b]s' = FF
+A primeira expressão fica:
+<S, s> -> s'   <repeat S until b, s'> -> s''
+-------------------------------------------- if B[b]s' = FF
+<repeat S until b, s> -> s''
+
+Se B[b]s'' for verdadeiro, então
+<S,s'> -> s''
+----------------------------- if B[b]s'' = TT
+<repeat S until b, s'> -> s''
+
+Se não for, seguiremos no loop, produzindo o estado s'''
+<S,s'> -> s''  <repeat S until b, s''> -> s'''
+---------------------------------------------- if B[b]s'' = FF
+<repeat S until b, s'> -> s'''
+
+Se nenhum estado obtido tiver B[b]s^k == TT, temos um loop infinito. 
+Alguma iteração deve produzir B[b]s^k == TT, o que sai do loop de 'repeat' e 
+o estado inicial fica em s^k
+
+A segunda fica:
+Se o B[b]s'' = TT
+                                                 <S, s'> -> s''    
+                                                ----------------------------- [if B[b]s'' = TT]
+                        B[b]s' -> FF            <repeat S until b, s'> -> s''
+                        ----------------------------------------------------- [if FF]
+<S,s> -> s'             <if b then skip else repeat S until b, s'> -> s''
+----------------------------------------------------------------------------- [comp2]
+comp<S; if b then skip else repeat S until b, s> -> s''
+
+Se o B[b]s'' = FF, seguiremos no loop, produzindo s'''
+                                                 <S, s'> -> s''  <repeat S until b, s''> -> s'''
+                                                ------------------------------------------------ [if B[b]s'' = FF]
+                        B[b]s' -> FF            <repeat S until b, s'> -> s'''
+                        ------------------------------------------------------------------------ [if FF]
+<S,s> -> s'             <if b then skip else repeat S until b, s'> -> s'''
+------------------------------------------------------------------------------------------------ [comp2]
+comp<S; if b then skip else repeat S until b, s> -> s'''
+
+Se nenhum estado obtido tiver B[b]s^k == TT, temos um loop infinito, tal como 
+com a expressão anterior.
+Alguma iteração do loop no else deve produzir B[b]s^k == TT, para que seja 
+possível sair do loop e o estado terminar em s^k. Exatamente o mesmo 
+comportamento da expressão anterior.
+
+Com isso, temos que as duas expressões são equivalentes. 
+                                                                        (QED)
+
