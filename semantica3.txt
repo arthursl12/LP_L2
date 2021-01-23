@@ -1,0 +1,10 @@
+Assumimos que está definida a operação de substituição para operações 
+aritméticas.
+
+Substituição Para Booleanos: b[y |-> a0]
+(true)[y |-> a0] = true
+(false)[y |-> a0] = false
+(a1 = a2)[y |-> a0] = ((a1[y |-> a0]) = (a2[y |-> a0]))
+(a1 <= a2)[y |-> a0] = (a1[y |-> a0] <= a2[y |-> a0])
+(not b1)[y |-> a0] = (not b1[y |-> a0])
+(b1 and b2)[y |-> a0] = (b1[y |-> a0] and b2[y |-> a0])
