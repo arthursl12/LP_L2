@@ -1,4 +1,38 @@
 (a)
+Bloco 0: escopo global
+Bloco 1: escopo da função g
+Bloco 2: escopo da função f
+Bloco 3: escopo da função h
+
 (b)
+As variáveis são inc, x, y e z
+As funções são f, g e h
+
 (c)
-(d)
+inc: definida no bloco 1 e no bloco 3. Utilizada no bloco 4.
+x: definida e usada no bloco 1
+y: definida e usada no bloco 2
+z: definida e usada no bloco 3
+f: definida no bloco 1 e usada no bloco 3
+g: definida no bloco 0
+h: definida e usada no bloco 1 
+
+inc: definida no bloco 1 e no bloco 3. Pode ser usada no bloco 1 e no bloco 3.
+x: pode ser usada nos blocos 1,2 e 3
+y: só pode ser usada no bloco 2
+z: só pode ser usada no bloco 3
+inc: pode ser usada no bloco 1 e 3 (pois foi declarada ali), mas também no bloco 
+2 pois a função f foi definida no bloco 1, logo o bloco 1 engloba o bloco 2.
+
+(d) 
+Numa situação de escopo estático, o resultado é 6. Isso ocorre pois o valor de 
+'inc' na função f é avaliado na declaração da função, logo ele é 1. Assim, mesmo
+que a função h atribua um valor diferente para 'inc', essa variável já foi
+avaliada anteriormente para a função f e essa re-atribuição em h não afeta a 
+função f.
+
+Se SML possuísse escopo dinâmico, o resultado seria 7, pois o valor de 'inc' só 
+seria avaliado no momento da execução e, no caso, ele é definido como 2 na 
+função h e é usado como 2 na função f, visto que quando f é chamada, o valor de
+'inc' é 2.
+
