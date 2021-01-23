@@ -1,0 +1,57 @@
+    z := 0; while (y <= x) do (z := z+1; x := x-y)
+Como a árvore de derivação ficará bastante grande, vamos representando ela aos
+poucos enquanto a construímos. Inicialmente, notamos que o programa usa a forma
+de 'comp: S1; S2', logo podemos montar a raiz da árvore
+
+  T1                                        T2  
+------------------------------------------------------------- comp
+comp<z := 0; while (y <= x) do (z := z+1; x := x-y), s> -> sF
+
+O ramo T1 é uma atribuição e s1 = s[z |-> 0]
+T1: <z := 0, s> -> s1
+
+O ramo T2 é o comando while a partir do estado s1, sendo que o condicional
+B[(y <= x)]s1 = B[(5 <= 17)]s1 = tt.
+T2:
+    T3                                  T4
+-------------------------------------------------------
+<while (y <= x) do (z := z+1; x := x-y), s1> -> sF
+
+O ramo T3 também é uma sub-árvore e possui raiz <z: z+1; x := x-y, s1>
+T3: 
+<z: z+1, s1> -> s2      <x: x-y,s2> -> s3
+------------------------------------------
+<z: z+1; x := x-y, s1> -> s3  
+
+s2 = s[z |-> 1]
+s3 = s[x |-> 12][z |-> 1]
+
+O ramo T4 é a iteração seguinte, também é uma árvore com o while na raiz, sendo
+que o condicional B[(y <= x)]s3 = B[(5 <= 12)]s3 = tt.
+T4:
+<z: z+1, s3> -> s4      <x: x-y,s2> -> s5
+------------------------------------------
+<z: z+1; x := x-y, s3> -> s5                      T5
+-------------------------------------------------------------
+<while (y <= x) do (z := x+1; x := x-y), s3> -> sF
+
+s4 = s[z |-> 2][x |-> 12]
+s5 = s[x |-> 7][z |-> 2]
+
+O ramo T5 é mais uma iteração, com condicional agora 
+B[(y <= x)]s5 = B[(5 <= 7)]s5 = tt
+T5:
+<z: z+1, s5> -> s5      <x: x-y,s6> -> s7
+------------------------------------------
+<z: z+1; x := x-y, s5> -> s7                      T6
+-------------------------------------------------------------
+<while (y <= x) do (z := x+1; x := x-y), s5> -> sF
+
+s6 = s[z |-> 3][x |-> 7]
+s7 = s[x |-> 2][z |-> 3]
+
+Finalmente, o ramo T6 tem raiz <while (y <= x) do (z := x+1; x := x-y), s7>,
+mas como B[(y <= x)]s7 = B[(5 <= 2)]s7 = ff, temos a última iteração do while:
+T6: <while (y <= x) do (z := x+1; x := x-y), s7> -> sF
+
+sF = s7
