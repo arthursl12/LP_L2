@@ -1,0 +1,34 @@
+
+- Programa: while (not(x=1)) do (y := y*x; x := x-1)
+Se x for inicialmente maior ou igual a 1 no estado s inicial, o programa sempre
+termina, pois faremos iterações modificando o estado em cada uma delas, 
+finalizando num estado final sF quando sairmos do loop. 
+
+Contudo, se x inicialmente for estritamente menor do que 1, a cada iteração 
+estaremos mudando para um estado s^(k+1), pois mudaremos o valor de y e o de x.
+Não há um estado final sF', o loop sempre continua, nesse caso.
+
+(Eventualmente, se rodarmos esse código numa máquina física teremos um underflow
+em x, causando um erro em tempo de execução, o que não configuraria mais um loop
+infinito, pela definição do livro).
+
+Assim, esse programa nem sempre termina e nem sempre entra em loop infinito.
+
+- Programa: while (1 <= x) do (y := y*x; x := x-1)
+Se o estado inicial s tiver x estritamente menor do que 1, ele não modificará 
+esse estado e pela regra do while, retornará simplesmente esse estado s, que 
+será o s' final.
+
+Por outro lado, se x for maior ou igual a um, entraremos no loop, modificando o
+valor de x e de y a cada iteração, produzindo estados s^k intermediários. Como
+estamos diminuindo o valor do contador x, em algum momento, com certeza, 
+sairemos do loop e conseguiremos chegar no estado final s', advindo da regra do 
+while quando a condição é falsa.
+
+Desse modo, esse programa sempre termina.
+
+- Programa: while true do skip
+Do ponto de vista dos estados, no loop nunca modificaremos o estado s inicial,
+tendo em vista a regra do 'skip' na tabela. Logo nunca conseguiremos ir para 
+um outro estado s'. Desse modo, como o estado s usado é genérico, esse programa 
+sempre entra em loop infinito.
