@@ -5,7 +5,7 @@ Entradas:
 *)
 
 count := 1;
-total := 1;
+z := 1;
 while (count <= y) do   
-    total := total * x;
+    z := z * x;
     count := count + 1
