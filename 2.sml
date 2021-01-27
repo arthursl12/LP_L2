@@ -5,7 +5,8 @@ datatype area =
   | ARetangulo of area * area
 ;
 
-fun eval (RConst r) = r
+exception LadoNegativoError
+fun eval (RConst r) = if (r < 0.0) then raise LadoNegativoError else r
   | eval (AQuadrado(lado)) = eval(lado) * eval(lado) 
   | eval (ACirculo(raio)) = eval(raio) * eval(raio) * Math.pi
   | eval (ARetangulo(l1,l2)) = eval(l1) * eval(l2)
