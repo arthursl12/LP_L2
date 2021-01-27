@@ -1,34 +1,48 @@
+Os conceitos de "terminar" e de "entrar em loop", bem como o de "sempre 
+terminar" e o de "sempre entrar em loop infinito" utilizados são os da página 37
+do livro Semantics with Applications: An Appetizer, disponibilizado no Moodle.
 
-- Programa: while (not(x=1)) do (y := y*x; x := x-1)
-Se x for inicialmente maior ou igual a 1 no estado s inicial, o programa sempre
-termina, pois faremos iterações modificando o estado em cada uma delas, 
-finalizando num estado final sF quando sairmos do loop. 
+### Programa: while (not(x=1)) do (y := y*x; x := x-1)
+Se x for inicialmente maior que 1 no estado s inicial, entraremos no loop e 
+modificaremos o estado s inicial a cada iteração, decrementando o valor de x e 
+alterando o de y. Em algum momento, x chegará a 1, já que estamos fazendo 
+decrementos unitários. Quando isso ocorrer, o condicional de controle do while 
+será avaliado como falso e, como observado na tabela, o comando retorna o estado
+da última iteração inalterado. Nesse caso, faremos uma sequência finita de 
+passos até que o valor de x iguale a 1, o que caracteriza que o programa termina
+nessas circunstâncias. 
+
+Se o estado inicial s tiver x como exatamente 1, pela descrição do comando while 
+na tabela, a avaliação do condicional será falso e o comando retorna o estado 
+passado de forma inalterada. Nesse caso, o programa termina, pois possui uma 
+sequência de derivação com um passo apenas, que é finita.
 
 Contudo, se x inicialmente for estritamente menor do que 1, a cada iteração 
-estaremos mudando para um estado s^(k+1), pois mudaremos o valor de y e o de x.
-Não há um estado final sF', o loop sempre continua, nesse caso.
-
-(Eventualmente, se rodarmos esse código numa máquina física teremos um underflow
-em x, causando um erro em tempo de execução, o que não configuraria mais um loop
-infinito, pela definição do livro).
+estaremos mudando para um novo estado, decrementando x e modificando o valor de 
+y. Mas como o condicional de controle nunca será falso, a árvore de derivação
+se torna infinita, caracterizando um loop infinito.
 
 Assim, esse programa nem sempre termina e nem sempre entra em loop infinito.
 
-- Programa: while (1 <= x) do (y := y*x; x := x-1)
-Se o estado inicial s tiver x estritamente menor do que 1, ele não modificará 
-esse estado e pela regra do while, retornará simplesmente esse estado s, que 
-será o s' final.
+### Programa: while (1 <= x) do (y := y*x; x := x-1)
+Se o estado inicial s tiver x estritamente menor do que 1, pela descrição do
+comando while na tabela, a avaliação do condicional será falso e o comando 
+retorna o estado passado de forma inalterada. Nesse caso, o programa termina, 
+pois possui uma sequência de derivação com um passo apenas, que é finita. 
 
 Por outro lado, se x for maior ou igual a um, entraremos no loop, modificando o
 valor de x e de y a cada iteração, produzindo estados s^k intermediários. Como
-estamos diminuindo o valor do contador x, em algum momento, com certeza, 
-sairemos do loop e conseguiremos chegar no estado final s', advindo da regra do 
-while quando a condição é falsa.
+estamos diminuindo o valor do contador x, em algum momento, com certeza, o valor
+de x será menor que um, o que tornará o condicional de controle do loop falso e 
+o comando while retorna o estado da última iteração. Novamente, haverá uma 
+sequência finita de derivação.
 
-Desse modo, esse programa sempre termina.
+Como esses dois casos englobam todas os estados iniciais possíveis para o valor 
+de x, esse programa sempre termina.
 
-- Programa: while true do skip
-Do ponto de vista dos estados, no loop nunca modificaremos o estado s inicial,
-tendo em vista a regra do 'skip' na tabela. Logo nunca conseguiremos ir para 
-um outro estado s'. Desse modo, como o estado s usado é genérico, esse programa 
-sempre entra em loop infinito.
+### Programa: while true do skip
+Com base na tabela, o comando while só termina quando o condicional avaliado 
+como falso. Assim, no caso, como o condicional sempre é verdadeiro, ficaremos
+infinitamente aumentando a sequência de derivação, o que caracteriza um loop 
+infinito. Tendo em vista que essa situação independe do estado s, temos que
+esse programa sempre entre em loop infinito.
