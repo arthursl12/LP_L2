@@ -1,5 +1,5 @@
 Assumimos que está definida a operação de substituição para operações 
-aritméticas na página 18 do livro Semantics with Applications: An Appetizer, 
+aritméticas da página 18 do livro Semantics with Applications: An Appetizer, 
 disponibilizado no Moodle.
 
 Substituição Para Booleanos: b[y |-> a0]
