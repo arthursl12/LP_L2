@@ -1,10 +1,12 @@
 (a)
-Bloco 0: escopo global
-Bloco 1: escopo da função g
-Bloco 2: escopo do let da linha 2
-Bloco 3: escopo da função f
-Bloco 4: escopo da função h
-Bloco 5: escopo do let da linha 6
+Bloco 0: escopo global ou escopo da declaração de g (onde ela pode ser chamada)
+Bloco 1: escopo do corpo da função g 
+Bloco 2: escopo da variável inc da linha 3 (onde ela pode ser usada)
+Bloco 3: escopo da declaração da função f (onde ela pode ser chamada)
+Bloco 4: escopo do corpo da função f
+Bloco 5: escopo da declaração da função h (onde ela pode ser chamada)
+Bloco 6: escopo do corpo da função h
+Bloco 7: escopo da variável inc da linha 7 (onde ela pode ser usada)
 
 (b)
 As variáveis são x, y, z, inc (linha 3) e inc (linha 7)
@@ -12,13 +14,13 @@ As funções são f, g e h
 
 (c)
 x -> bloco 1
-y -> bloco 3
-z -> bloco 4
+y -> bloco 4
+z -> bloco 6
 inc (linha 3) -> bloco 2
-inc (linha 7) -> bloco 5
-f -> bloco 2 ========= CONFERIR
-g -> bloco 0 ========= CONFERIR
-h -> bloco 2 ========= CONFERIR
+inc (linha 7) -> bloco 7
+f -> bloco 3
+g -> bloco 0
+h -> bloco 6
 
 (d) 
 Numa situação de escopo estático, o resultado é 6. Isso ocorre pois o valor de 
