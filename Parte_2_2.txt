@@ -1,7 +1,6 @@
-B[not(x=1)]
-s = [(x, 3)]
+Encontrar B[not(x=1)], sendo s = [(x, 3)]
 
-B[not(x=1)]s 
+B[not(x=1)]s =
     = not (B[x=1]s)
     = not (A[x]s = A[1]s)
     = not (s x = N[1])

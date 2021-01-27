@@ -61,13 +61,15 @@ assert( eval(Multi(Plus(IConst 23, IConst 5), IConst 0)), 0);
 assert( eval(Div(Plus(IConst 25, IConst 5), IConst 5)), 6); 
 assert( eval(Div(Plus(IConst ~25, IConst ~5), IConst ~5)), 6); 
 assert( eval(Div(Plus(IConst ~25, IConst ~5), IConst 5)), ~6); 
-assert( eval(Div(Plus(IConst 25, IConst 5), IConst ~5)), ~6); 
 assert( eval(Div(Plus(IConst 23, IConst 5), IConst 6)), 4); 
 assert( eval(Div(Plus(IConst ~23, IConst ~5), IConst ~6)), 4); 
-assert( eval(Div(Plus(IConst 23, IConst 5), IConst ~6)), ~4);
-assert( eval(Div(Plus(IConst ~23, IConst ~5), IConst 6)), ~4);
 assert( eval(Div(Plus(IConst 23, IConst 5), IConst 1)), 28);
 assert( eval(Div(Plus(IConst 23, IConst 5), IConst 0)), 0);
+
+(* Div (+ e -) *)
+assert( eval(Div(Plus(IConst 25, IConst 5), IConst ~5)), ~6);
+assert( eval(Div(Plus(IConst 23, IConst 5), IConst ~6)), ~4);
+assert( eval(Div(Plus(IConst ~23, IConst ~5), IConst 6)), ~4);
 
 (* Max *)
 assert( eval(Max(Plus(IConst 23, IConst 5), IConst 6)), 28);
