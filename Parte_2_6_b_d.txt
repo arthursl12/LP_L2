@@ -1,4 +1,4 @@
-(a) Implementado no arquivo '6.sml'
+(a) Implementado no arquivo 'Parte_2_6_a_c.sml'
 
 (b) O comando 'repeat' foi definido no datatype Stm no arquivo '6.sml'
 A relação para ele, seguindo a notação da Tabela 2.1:
@@ -11,7 +11,7 @@ A relação para ele, seguindo a notação da Tabela 2.1:
             -------------------------------------------- if B[b]s' = TT
             <repeat S until b, s> -> s'
 
-(c) Implementado no arquivo '6.sml'
+(c) Implementado no arquivo 'Parte_2_6_a_c.sml'
 
 (d) Vamos fazer uma demonstração por casos
 Caso 1: B[b]s' = TT
